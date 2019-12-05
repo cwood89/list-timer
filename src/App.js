@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import TodoList from './TodoList'
 import TodoItems from './TodoItems'
+import Timer from './Timer'
 class App extends Component {
   constructor() {
     super()
@@ -45,6 +46,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Timer />
         <TodoList
           inputElement={this.inputElement}
           addItem={this.addItem}
