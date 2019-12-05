@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import TodoList from './TodoList'
+import TodoItems from './TodoItems'
 class App extends Component {
   constructor() {
     super()
@@ -32,6 +33,15 @@ class App extends Component {
     }
   }
 
+  deleteItem = key => {
+    const filteredItems = this.state.items.filter(item => {
+      return item.key !== key
+    })
+    this.setState({
+      items: filteredItems,
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -40,6 +50,9 @@ class App extends Component {
           addItem={this.addItem}
           handleInput={this.handleInput}
           currentItem={this.state.currentItem} />
+        <TodoItems
+          entries={this.state.items}
+          deleteItem={this.deleteItem} />
       </div>
     )
   }
