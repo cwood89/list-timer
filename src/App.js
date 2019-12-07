@@ -3,24 +3,29 @@ import './App.css'
 import TodoList from './TodoList'
 import TodoItems from './TodoItems'
 import Timer from './Timer'
+
+import Sample from './sample';
+
 class App extends Component {
   constructor() {
     super()
     this.inputElement = React.createRef()
     this.state = {
       items: [],
-      currentItem: { text: '', key: '' },
+      currentItem: { text: '', key: '', duration: '' },
+      seconds: '',
+      isActive: false,
     }
   }
-
-
   handleInput = e => {
+    // need to create ref to time picker
     const itemText = e.target.value
-    const currentItem = { text: itemText, key: Date.now() }
+    const currentItem = { text: itemText, key: Date.now(), duration: 20 }
     this.setState({
       currentItem,
     })
   }
+
   addItem = e => {
     e.preventDefault();
     const newItem = this.state.currentItem
@@ -29,7 +34,7 @@ class App extends Component {
       const items = [...this.state.items, newItem]
       this.setState({
         items: items,
-        currentItem: { text: '', key: '' },
+        currentItem: { text: '', key: '', duration: '' },
       })
     }
   }
@@ -46,7 +51,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Timer />
+        <Sample />
+        <Timer
+          duration={this.state.currentItem.duration} />
         <TodoList
           inputElement={this.inputElement}
           addItem={this.addItem}
